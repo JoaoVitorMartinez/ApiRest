@@ -2,7 +2,7 @@ package routes
 
 import (
 	"App/controllers"
-	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -11,7 +11,7 @@ import (
 func Router() {
 	r := mux.NewRouter()
 
-	fmt.Println("Servidor inicializado...")
+	log.Println("Servidor inicializado.")
 
 	r.HandleFunc("/", controllers.Home).Methods("GET")
 
