@@ -19,5 +19,7 @@ func Router() {
 
 	r.HandleFunc("/api/jogos/{id}", controllers.BuscaJogoPorId).Methods("GET")
 
+	r.HandleFunc("/api/inserir", controllers.InserirJogo).Methods("POST")
+
 	http.ListenAndServe(":8000", r)
 }

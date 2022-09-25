@@ -33,3 +33,11 @@ func BuscaJogoPorId(w http.ResponseWriter, r *http.Request) {
 
 	json.NewEncoder(w).Encode(j)
 }
+
+func InserirJogo(w http.ResponseWriter, r *http.Request) {
+	var novoJogo models.Jogo
+
+	json.NewDecoder(r.Body).Decode(&novoJogo)
+	database.DB.Create(&novoJogo)
+	json.NewEncoder(w).Encode(novoJogo)
+}
