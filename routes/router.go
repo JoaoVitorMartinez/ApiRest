@@ -2,14 +2,17 @@ package routes
 
 import (
 	"App/controllers"
+	"App/middleware"
 	"log"
 	"net/http"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 )
 
 func Router() {
 	r := mux.NewRouter()
+	r.Use(middleware.ContentTypeMiddleware)
 
 	log.Println("Servidor inicializado.")
 
@@ -25,5 +28,5 @@ func Router() {
 
 	r.HandleFunc("/api/atualizar/{id}", controllers.AtualizaJogo).Methods("PUT")
 
-	http.ListenAndServe(":8000", r)
+	http.ListenAndServe(":8000", handlers.CORS(handlers.AllowedOrigins([]string{"*"}))(r))
 }
