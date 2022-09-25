@@ -13,6 +13,7 @@ var (
 )
 
 func ConectaBanco() {
+	log.Println("Conectando Banco de dados...")
 	conexao := "host=localhost user=root password=root dbname=root port=5432 sslmode=disable"
 	DB, err = gorm.Open(postgres.Open(conexao))
 

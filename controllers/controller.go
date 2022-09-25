@@ -1,19 +1,21 @@
 package controllers
 
 import (
+	"App/database"
 	"App/models"
 	"encoding/json"
 	"log"
 	"net/http"
-	"strconv"
 
 	"github.com/gorilla/mux"
 )
 
 func TodosOsJogos(w http.ResponseWriter, r *http.Request) {
 	log.Println("Acesso em '/api/jogos'")
+	var j []models.Jogo
+	database.DB.Find(&j)
 
-	json.NewEncoder(w).Encode(models.Jogos)
+	json.NewEncoder(w).Encode(j)
 
 }
 
@@ -26,11 +28,8 @@ func BuscaJogoPorId(w http.ResponseWriter, r *http.Request) {
 	log.Println("Acesso em '/api/jogos/{id}'")
 	vars := mux.Vars(r)
 	id := vars["id"]
+	var j []models.Jogo
+	database.DB.First(&j, id)
 
-	for _, jogo := range models.Jogos {
-		if id == strconv.Itoa(jogo.Id) {
-			json.NewEncoder(w).Encode(jogo)
-
-		}
-	}
+	json.NewEncoder(w).Encode(j)
 }

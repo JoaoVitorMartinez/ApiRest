@@ -7,5 +7,3 @@ type Jogo struct {
 	Preco     float64 `json:"Preco"`
 	Nota      float32 `json:"Nota"`
 }
-
-var Jogos []Jogo
