@@ -21,5 +21,9 @@ func Router() {
 
 	r.HandleFunc("/api/inserir", controllers.InserirJogo).Methods("POST")
 
+	r.HandleFunc("/api/delete/{id}", controllers.DeletaJogo).Methods("DELETE")
+
+	r.HandleFunc("/api/atualizar/{id}", controllers.AtualizaJogo).Methods("PUT")
+
 	http.ListenAndServe(":8000", r)
 }

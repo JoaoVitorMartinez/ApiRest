@@ -41,3 +41,26 @@ func InserirJogo(w http.ResponseWriter, r *http.Request) {
 	database.DB.Create(&novoJogo)
 	json.NewEncoder(w).Encode(novoJogo)
 }
+
+func DeletaJogo(w http.ResponseWriter, r *http.Request) {
+
+	vars := mux.Vars(r)
+	id := vars["id"]
+	var jogo models.Jogo
+	database.DB.Delete(&jogo, id).Commit()
+
+	json.NewEncoder(w).Encode(jogo)
+	log.Println("Acesso em '/api/jogos/delete/" + id + "'")
+}
+
+func AtualizaJogo(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id := vars["id"]
+	var jogo models.Jogo
+
+	database.DB.First(&jogo, id)
+	json.NewDecoder(r.Body).Decode(&jogo)
+	database.DB.Save(&jogo)
+	json.NewEncoder(w).Encode(jogo)
+
+}
